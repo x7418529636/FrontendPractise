@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <style>
+        body {
+          text-align: center;
+          margin-top: 250px;
+        }
+        input{
+            width: 240px;
+        }
+    </style>
+    <head>
+        <title>practice1</title>
+        <script>
+            function showAlert(){
+                const name = document.getElementById('name').value;
+                const gender = document.getElementById("gender").value;
+                const phone = document.getElementById("phone").value;
+
+                alert(`${name} ${gender} ${phone}`);
+            }
+        </script>
+    </head>
+    <body>
+        <label for="'name">Name</label><br>
+        <input type="text" id= "name" placeholder="請輸入姓名"><br>
+        <label for="'gender">Gender</label><br>
+        <input type="text" id= "gender" placeholder="請輸入性別"><br>
+        <label for="'phone">Phone number</label><br>
+        <input type="text" id= "phone" placeholder="請輸入電話號碼"><br><br>
+        <button type="button" onclick="showAlert()">送出</button>
+    </body>
+</html>
