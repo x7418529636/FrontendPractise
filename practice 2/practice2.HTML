@@ -36,6 +36,27 @@
                     return;
                 }
 
+                if(name.length > 10)
+                {
+                    alert("姓名過長");
+                    return;
+                }
+
+                if(gender !== 'M' && gender !== 'm' && gender !== 'F' && gender !== 'f')
+                {
+                    alert("性別請輸入 M / F");
+                    return;
+                }
+
+                for(element of phone){
+                    if(isNaN(Number(element))){
+                        alert("電話請輸入數字");
+                        return;
+
+                    }
+                    
+                };
+
                 array.push(`${name} ${gender} ${phone}`);
 
                 let arrayContainer = document.querySelector('#arrayContainer');
