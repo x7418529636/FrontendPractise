@@ -20,13 +20,69 @@
         input{
             width: 240px;
         }
+        .button-sector{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            gap: 10px;
+        }
+        .dropdown-container{
+            position: relative;
+        }
+        .dropdown-content{
+            position: absolute;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            margin-top: 3px;
+            border: 0.2px solid black;
+        }
+        .dropdown-content a{
+            background-color: white;
+            width: 140px;
+            text-decoration: none;
+            color: black;
+            border: 0.2px solid black;
+            
+        }
+        .dropdown-content a:hover{
+            background-color: gray;
+        }
+        .dropdown-content a:visited{
+            color: black;
+        }
     </style>
     <head>
-        <title>practice2</title>
+        <title>practice3</title>
+    </head>
+    <body>
+        <label>Name</label><br>
+        <input type="text" id="name" placeholder="請輸入姓名"><br>
+        <label>Gender</label><br>
+        <input type="text" id="gender" placeholder="請輸入性別"><br>
+        <label>Phone number</label><br>
+        <input type="text" id="phone" placeholder="請輸入電話號碼"><br><br>
+        
+        <div class="button-sector">
+            <div class="dropdown-container">
+                <button class="dropdown-button" type="button" onclick="showDropdownContent()">性別 ▾</button>
+                <div class="dropdown-content" style="visibility: hidden;">
+                    <a href="#" onclick="select('ALL')">ALL</a>
+                    <a href="#" onclick="select('M')">M</a>
+                    <a href="#" onclick="select('F')">F</a>
+                </div>
+            </div>
+            <button type="button" onclick="add()">新增</button>
+            <button type="button" onclick="showAlert()">送出</button>
+        </div>
+        <div id="arrayContainer"></div>
+
         <script>
             let array = [];
 
             function add() {
+                document.querySelector(".dropdown-content").style.visibility = "hidden";
                 const name = document.querySelector("#name").value;
                 const gender = document.querySelector('#gender').value;
                 const phone = document.querySelector('#phone').value;
@@ -57,10 +113,10 @@
                     
                 };
 
-                array.push(`${name} ${gender} ${phone}`);
+                array.push({name: name, gender: gender, phone: phone});
 
-                let arrayContainer = document.querySelector('#arrayContainer');
-                let newItem = document.createElement('div');
+                const arrayContainer = document.querySelector('#arrayContainer');
+                const newItem = document.createElement('div');
                 newItem.classList.add('array');
                 newItem.textContent = `${name}  ${gender}  ${phone}`;
                 arrayContainer.appendChild(newItem);
@@ -71,25 +127,77 @@
             }
 
             function showAlert() {
+                let result = "";
+                
                 if (array.length === 0) {
                     alert("請新增資料");
                     return;
                 }
-                alert(array.join("\n"));
+                
+                array.forEach((element) => {
+                    result += element.name + " " + element.gender + " " + element.phone + "\n";
+                });
+                alert(result);
+                document.querySelector(".dropdown-content").style.visibility = "hidden";
+            }
+
+            function showDropdownContent(){
+                if(document.querySelector(".dropdown-content").style.visibility == "hidden")
+                {
+                    document.querySelector(".dropdown-content").style.visibility = "visible";
+                }
+                else
+                {
+                    document.querySelector(".dropdown-content").style.visibility = "hidden";
+                }
+                
+            }
+
+            function select(genderType){
+                if(genderType === 'ALL'){
+                    document.querySelector("#arrayContainer").innerHTML = "";
+
+                    for(element of array){
+                        let arrayContainer = document.querySelector('#arrayContainer');
+                        let newItem = document.createElement('div');
+                        newItem.classList.add('array');
+                        newItem.textContent = `${element.name}  ${element.gender}  ${element.phone}`;
+                        console.log(element.name);
+                        arrayContainer.appendChild(newItem);
+                    }
+                    document.querySelector(".dropdown-content").style.visibility = "hidden";
+                }
+
+                if(genderType === 'M'){
+                    document.querySelector("#arrayContainer").innerHTML = "";
+
+                    for(element of array){
+                        if(element.gender === 'M'){
+                            let arrayContainer = document.querySelector('#arrayContainer');
+                            let newItem = document.createElement('div');
+                            newItem.classList.add('array');
+                            newItem.textContent = `${element.name}  ${element.gender}  ${element.phone}`;
+                            arrayContainer.appendChild(newItem);
+                        }
+                    }
+                    document.querySelector(".dropdown-content").style.visibility = "hidden";
+                }
+
+                if(genderType === 'F'){
+                    document.querySelector("#arrayContainer").innerHTML = "";
+
+                    for(element of array){
+                        if(element.gender === 'F'){
+                            let arrayContainer = document.querySelector('#arrayContainer');
+                            let newItem = document.createElement('div');
+                            newItem.classList.add('array');
+                            newItem.textContent = `${element.name}  ${element.gender}  ${element.phone}`;
+                            arrayContainer.appendChild(newItem);
+                        }
+                    }
+                    document.querySelector(".dropdown-content").style.visibility = "hidden";
+                }
             }
         </script>
-    </head>
-    <body>
-        <label>Name</label><br>
-        <input type="text" id="name" placeholder="請輸入姓名"><br>
-        <label>Gender</label><br>
-        <input type="text" id="gender" placeholder="請輸入性別"><br>
-        <label>Phone number</label><br>
-        <input type="text" id="phone" placeholder="請輸入電話號碼"><br><br>
-    
-        <button type="button" onclick="add()">新增</button>
-        <button type="button" onclick="showAlert()">送出</button>
-    
-        <div id="arrayContainer"></div>
     </body>
     </html>
