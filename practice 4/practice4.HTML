@@ -17,6 +17,9 @@
             background-color: #f9f9f9;
             border-radius: 5px;
         }
+        .array a{
+            color: black;
+        }
         input{
             width: 240px;
         }
@@ -54,7 +57,7 @@
         }
     </style>
     <head>
-        <title>practice3</title>
+        <title>practice4</title>
     </head>
     <body>
         <label>Name</label><br>
@@ -116,10 +119,19 @@
                 array.push({name: name, gender: gender, phone: phone});
 
                 const arrayContainer = document.querySelector('#arrayContainer');
+                
                 const newItem = document.createElement('div');
                 newItem.classList.add('array');
-                newItem.textContent = `${name}  ${gender}  ${phone}`;
+                newItem.textContent = `${name}  ${gender}  ${phone} `;
+                newItem.setAttribute("id", `${name}  ${gender}  ${phone}`);
                 arrayContainer.appendChild(newItem);
+
+                const arrayItem = document.getElementById(`${name}  ${gender}  ${phone}`)
+                const deleteButton = document.createElement('a');
+                deleteButton.textContent = 'X';
+                deleteButton.href = '#';
+                deleteButton.onclick = () => deleteItem(`${name}  ${gender}  ${phone}`);
+                arrayItem.appendChild(deleteButton);
 
                 document.getElementById('name').value = "";
                 document.getElementById('gender').value = "";
@@ -161,9 +173,16 @@
                         let arrayContainer = document.querySelector('#arrayContainer');
                         let newItem = document.createElement('div');
                         newItem.classList.add('array');
-                        newItem.textContent = `${element.name}  ${element.gender}  ${element.phone}`;
-                        console.log(element.name);
+                        newItem.textContent = `${element.name}  ${element.gender}  ${element.phone} `;
+                        newItem.setAttribute("id", `${element.name}  ${element.gender}  ${element.phone}`);
                         arrayContainer.appendChild(newItem);
+
+                        const arrayItem = document.getElementById(`${element.name}  ${element.gender}  ${element.phone}`);
+                        const deleteButton = document.createElement('a');
+                        deleteButton.textContent = 'X';
+                        deleteButton.href = '#';
+                        deleteButton.onclick = () => deleteItem(`${element.name}  ${element.gender}  ${element.phone}`);
+                        arrayItem.appendChild(deleteButton);
                     }
                     document.querySelector(".dropdown-content").style.visibility = "hidden";
                 }
@@ -176,8 +195,16 @@
                             let arrayContainer = document.querySelector('#arrayContainer');
                             let newItem = document.createElement('div');
                             newItem.classList.add('array');
-                            newItem.textContent = `${element.name}  ${element.gender}  ${element.phone}`;
+                            newItem.textContent = `${element.name}  ${element.gender}  ${element.phone} `;
+                            newItem.setAttribute("id", `${element.name}  ${element.gender}  ${element.phone}`);
                             arrayContainer.appendChild(newItem);
+
+                            const arrayItem = document.getElementById(`${element.name}  ${element.gender}  ${element.phone}`);
+                            const deleteButton = document.createElement('a');
+                            deleteButton.textContent = 'X';
+                            deleteButton.href = '#';
+                            deleteButton.onclick = () => deleteItem(`${element.name}  ${element.gender}  ${element.phone}`);
+                            arrayItem.appendChild(deleteButton);
                         }
                     }
                     document.querySelector(".dropdown-content").style.visibility = "hidden";
@@ -191,12 +218,38 @@
                             let arrayContainer = document.querySelector('#arrayContainer');
                             let newItem = document.createElement('div');
                             newItem.classList.add('array');
-                            newItem.textContent = `${element.name}  ${element.gender}  ${element.phone}`;
+                            newItem.textContent = `${element.name}  ${element.gender}  ${element.phone} `;
+                            newItem.setAttribute("id", `${element.name}  ${element.gender}  ${element.phone}`);
                             arrayContainer.appendChild(newItem);
+
+                            const arrayItem = document.getElementById(`${element.name}  ${element.gender}  ${element.phone}`);
+                            const deleteButton = document.createElement('a');
+                            deleteButton.textContent = 'X';
+                            deleteButton.href = '#';
+                            deleteButton.onclick = () => deleteItem(`${element.name}  ${element.gender}  ${element.phone}`);
+                            arrayItem.appendChild(deleteButton);
                         }
                     }
                     document.querySelector(".dropdown-content").style.visibility = "hidden";
                 }
+            }
+
+            function deleteItem(id){
+                let itemDeleted = document.getElementById(id);
+                itemDeleted.remove();
+                component = id.split(" ");
+
+                console.log(component);
+                
+                const index = array.findIndex(element =>
+                    element.name == component[0] && element.gender == component[2] && element.phone == component[4]
+                );
+
+                if (index !== -1) {
+                    array.splice(index, 1); 
+                }
+
+                console.log(array);
             }
         </script>
     </body>
