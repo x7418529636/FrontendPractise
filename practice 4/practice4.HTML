@@ -175,13 +175,15 @@
                         newItem.classList.add('array');
                         newItem.textContent = `${element.name}  ${element.gender}  ${element.phone} `;
                         newItem.setAttribute("id", `${element.name}  ${element.gender}  ${element.phone}`);
+                        console.log(`這是第一個輸出 ${element.name}  ${element.gender}  ${element.phone}`);
                         arrayContainer.appendChild(newItem);
 
                         const arrayItem = document.getElementById(`${element.name}  ${element.gender}  ${element.phone}`);
                         const deleteButton = document.createElement('a');
                         deleteButton.textContent = 'X';
                         deleteButton.href = '#';
-                        deleteButton.onclick = () => deleteItem(`${element.name}  ${element.gender}  ${element.phone}`);
+                        deleteButton.onclick = deleteItem.bind(null, `${element.name}  ${element.gender}  ${element.phone}`);
+                        console.log(`這是第二個輸出 ${element.name}  ${element.gender}  ${element.phone}`);
                         arrayItem.appendChild(deleteButton);
                     }
                     document.querySelector(".dropdown-content").style.visibility = "hidden";
