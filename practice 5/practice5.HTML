@@ -101,6 +101,18 @@
                 arrayItem.appendChild(deleteButton);
             }
 
+            function showDropdownContent(){
+                if(document.querySelector(".dropdown-content").style.visibility == "hidden")
+                {
+                    document.querySelector(".dropdown-content").style.visibility = "visible";
+                }
+                else
+                {
+                    document.querySelector(".dropdown-content").style.visibility = "hidden";
+                }
+                
+            }
+
             function add(name, gender, phone) {
                 document.querySelector(".dropdown-content").style.visibility = "hidden";
 
@@ -150,18 +162,6 @@
                 });
                 alert(result);
                 document.querySelector(".dropdown-content").style.visibility = "hidden";
-            }
-
-            function showDropdownContent(){
-                if(document.querySelector(".dropdown-content").style.visibility == "hidden")
-                {
-                    document.querySelector(".dropdown-content").style.visibility = "visible";
-                }
-                else
-                {
-                    document.querySelector(".dropdown-content").style.visibility = "hidden";
-                }
-                
             }
 
             function select(genderType){
