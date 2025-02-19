@@ -83,11 +83,14 @@
 
         <script>
             let array = [];
+            let genderType = "ALL";
+            let currentID = 0;
 
-            function generateHtml(array){
+            function generateHtml(arrayGenerated){
+                document.querySelector("#arrayContainer").innerHTML = "";
                 const arrayContainer = document.querySelector('#arrayContainer');
                 
-                array.forEach(element => {
+                arrayGenerated.forEach(element => {
                     const name = element.name;
                     const gender = element.gender;
                     const phone = element.phone;
@@ -102,7 +105,8 @@
                     const deleteButton = document.createElement('a');
                     deleteButton.textContent = 'X';
                     deleteButton.href = '#';
-                    deleteButton.onclick = () => deleteItem(array.findIndex(element => element.name == name && element.gender == gender && element.phone == phone));
+                    const target = array.find(item => item.name === name && item.gender === gender && item.phone === phone);
+                    deleteButton.onclick = () => deleteItem(target.id);
                     arrayItem.appendChild(deleteButton); 
                 });
             }
@@ -134,16 +138,22 @@
                     }
                 };
 
-                array.push({name: name, gender: gender, phone: phone});
+                array.push({id: currentID, name: name, gender: gender, phone: phone});
+                currentID++;
 
-                generateHtml(array);
+                filter(genderType);
 
                 document.getElementById('name').value = "";
                 document.getElementById('gender').value = "";
                 document.getElementById('phone').value = "";
             }
 
-            function select(genderType){
+            function select(genderSelected){
+                genderType = genderSelected;
+                filter(genderType);
+            }
+
+            function filter(subGenderType){
                 let newArray;
 
                 if(genderType === 'ALL'){
@@ -164,15 +174,15 @@
                 document.querySelector(".dropdown-content").style.visibility = "hidden";
             }
             
-            function deleteItem(index){
-                let itemDeleted = document.querySelector(`[data-key="${array[index].name} ${array[index].gender} ${array[index].phone}"]`);
-                itemDeleted.remove();
-
+            function deleteItem(id){
+                const index = array.findIndex(item => item.id === id);
                 if (index !== -1) {
                     array.splice(index, 1); 
                 }
 
-                console.log(array);
+                currentID--;
+
+                filter(genderType);
             }
 
             function showAlert() {
