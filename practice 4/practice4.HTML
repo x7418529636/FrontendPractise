@@ -169,7 +169,7 @@
                 if(genderType === 'ALL'){
                     document.querySelector("#arrayContainer").innerHTML = "";
 
-                    for(element of array){
+                    for(const element of array){
                         let arrayContainer = document.querySelector('#arrayContainer');
                         let newItem = document.createElement('div');
                         newItem.classList.add('array');
