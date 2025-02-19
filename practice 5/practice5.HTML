@@ -77,40 +77,34 @@
                 </div>
             </div>
             <button type="button" onclick="add(document.getElementById('name').value, document.getElementById('gender').value, document.getElementById('phone').value)">新增</button>
-            <button type="button" onclick="generateHtml(array)">送出</button>
+            <button type="button" onclick="showAlert()">送出</button>
         </div>
         <div id="arrayContainer"></div>
 
         <script>
             let array = [];
 
-            function createContent(name, gender, phone){
+            function generateHtml(array){
                 const arrayContainer = document.querySelector('#arrayContainer');
                 
-                const newItem = document.createElement('div');
-                newItem.classList.add('array');
-                newItem.textContent = `${name} ${gender} ${phone} `;
-                newItem.setAttribute("data-key", `${name} ${gender} ${phone}`);
-                arrayContainer.appendChild(newItem);
+                array.forEach(element => {
+                    const name = element.name;
+                    const gender = element.gender;
+                    const phone = element.phone;
 
-                const arrayItem = document.querySelector(`[data-key="${name} ${gender} ${phone}"]`);
-                const deleteButton = document.createElement('a');
-                deleteButton.textContent = 'X';
-                deleteButton.href = '#';
-                deleteButton.onclick = () => deleteItem(array.findIndex(element => element.name == name && element.gender == gender && element.phone == phone));
-                arrayItem.appendChild(deleteButton);
-            }
+                    const newItem = document.createElement('div');
+                    newItem.classList.add('array');
+                    newItem.textContent = `${name} ${gender} ${phone} `;
+                    newItem.setAttribute("data-key", `${name} ${gender} ${phone}`);
+                    arrayContainer.appendChild(newItem);
 
-            function showDropdownContent(){
-                if(document.querySelector(".dropdown-content").style.visibility == "hidden")
-                {
-                    document.querySelector(".dropdown-content").style.visibility = "visible";
-                }
-                else
-                {
-                    document.querySelector(".dropdown-content").style.visibility = "hidden";
-                }
-                
+                    const arrayItem = document.querySelector(`[data-key="${name} ${gender} ${phone}"]`);
+                    const deleteButton = document.createElement('a');
+                    deleteButton.textContent = 'X';
+                    deleteButton.href = '#';
+                    deleteButton.onclick = () => deleteItem(array.findIndex(element => element.name == name && element.gender == gender && element.phone == phone));
+                    arrayItem.appendChild(deleteButton); 
+                });
             }
 
             function add(name, gender, phone) {
@@ -142,14 +136,46 @@
 
                 array.push({name: name, gender: gender, phone: phone});
 
-                createContent(name, gender, phone);
+                generateHtml(array);
 
                 document.getElementById('name').value = "";
                 document.getElementById('gender').value = "";
                 document.getElementById('phone').value = "";
             }
 
-            function generateHtml(array) {
+            function select(genderType){
+                let newArray;
+
+                if(genderType === 'ALL'){
+                    document.querySelector("#arrayContainer").innerHTML = "";
+                    newArray = array;
+                }
+                else if(genderType === 'M'){
+                    document.querySelector("#arrayContainer").innerHTML = "";
+                    newArray = array.filter(item => {return item.gender == genderType});
+                }
+                else if(genderType === 'F'){
+                    document.querySelector("#arrayContainer").innerHTML = "";
+                    newArray = array.filter(item => {return item.gender == genderType});
+                }
+
+                generateHtml(newArray);
+                    
+                document.querySelector(".dropdown-content").style.visibility = "hidden";
+            }
+            
+            function deleteItem(index){
+                let itemDeleted = document.querySelector(`[data-key="${array[index].name} ${array[index].gender} ${array[index].phone}"]`);
+                itemDeleted.remove();
+
+                if (index !== -1) {
+                    array.splice(index, 1); 
+                }
+
+                console.log(array);
+            }
+
+            function showAlert() {
                 let result = "";
                 
                 if (array.length === 0) {
@@ -164,48 +190,16 @@
                 document.querySelector(".dropdown-content").style.visibility = "hidden";
             }
 
-            function select(genderType){
-                if(genderType === 'ALL'){
-                    document.querySelector("#arrayContainer").innerHTML = "";
-
-                    for(const element of array){
-                        createContent(element.name, element.gender, element.phone)
-                    }
+            function showDropdownContent(){
+                if(document.querySelector(".dropdown-content").style.visibility == "hidden")
+                {
+                    document.querySelector(".dropdown-content").style.visibility = "visible";
+                }
+                else
+                {
                     document.querySelector(".dropdown-content").style.visibility = "hidden";
                 }
-
-                if(genderType === 'M'){
-                    document.querySelector("#arrayContainer").innerHTML = "";
-
-                    for(element of array){
-                        if(element.gender === 'M'){
-                            createContent(element.name, element.gender, element.phone)
-                        }
-                    }
-                    document.querySelector(".dropdown-content").style.visibility = "hidden";
-                }
-
-                if(genderType === 'F'){
-                    document.querySelector("#arrayContainer").innerHTML = "";
-
-                    for(element of array){
-                        if(element.gender === 'F'){
-                            createContent(element.name, element.gender, element.phone)
-                        }
-                    }
-                    document.querySelector(".dropdown-content").style.visibility = "hidden";
-                }
-            }
-            
-            function deleteItem(index){
-                let itemDeleted = document.querySelector(`[data-key="${array[index].name} ${array[index].gender} ${array[index].phone}"]`);
-                itemDeleted.remove();
-
-                if (index !== -1) {
-                    array.splice(index, 1); 
-                }
-
-                console.log(array);
+                
             }
         </script>
     </body>
