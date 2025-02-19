@@ -76,19 +76,33 @@
                     <a href="#" onclick="select('F')">F</a>
                 </div>
             </div>
-            <button type="button" onclick="add()">新增</button>
-            <button type="button" onclick="showAlert()">送出</button>
+            <button type="button" onclick="add(document.getElementById('name').value, document.getElementById('gender').value, document.getElementById('phone').value)">新增</button>
+            <button type="button" onclick="generateHtml(array)">送出</button>
         </div>
         <div id="arrayContainer"></div>
 
         <script>
             let array = [];
 
-            function add() {
+            function createContent(name, gender, phone){
+                const arrayContainer = document.querySelector('#arrayContainer');
+                
+                const newItem = document.createElement('div');
+                newItem.classList.add('array');
+                newItem.textContent = `${name} ${gender} ${phone} `;
+                newItem.setAttribute("data-key", `${name} ${gender} ${phone}`);
+                arrayContainer.appendChild(newItem);
+
+                const arrayItem = document.querySelector(`[data-key="${name} ${gender} ${phone}"]`);
+                const deleteButton = document.createElement('a');
+                deleteButton.textContent = 'X';
+                deleteButton.href = '#';
+                deleteButton.onclick = () => deleteItem(array.findIndex(element => element.name == name && element.gender == gender && element.phone == phone));
+                arrayItem.appendChild(deleteButton);
+            }
+
+            function add(name, gender, phone) {
                 document.querySelector(".dropdown-content").style.visibility = "hidden";
-                const name = document.querySelector("#name").value;
-                const gender = document.querySelector('#gender').value;
-                const phone = document.querySelector('#phone').value;
 
                 if (name === "" || gender === "" || phone === "") {
                     alert("請填寫完整資訊");
@@ -111,34 +125,19 @@
                     if(isNaN(Number(element))){
                         alert("電話請輸入數字");
                         return;
-
                     }
-                    
                 };
 
                 array.push({name: name, gender: gender, phone: phone});
 
-                const arrayContainer = document.querySelector('#arrayContainer');
-                
-                const newItem = document.createElement('div');
-                newItem.classList.add('array');
-                newItem.textContent = `${name}  ${gender}  ${phone} `;
-                newItem.setAttribute("id", `${name}  ${gender}  ${phone}`);
-                arrayContainer.appendChild(newItem);
-
-                const arrayItem = document.getElementById(`${name}  ${gender}  ${phone}`)
-                const deleteButton = document.createElement('a');
-                deleteButton.textContent = 'X';
-                deleteButton.href = '#';
-                deleteButton.onclick = () => deleteItem(`${name}  ${gender}  ${phone}`);
-                arrayItem.appendChild(deleteButton);
+                createContent(name, gender, phone);
 
                 document.getElementById('name').value = "";
                 document.getElementById('gender').value = "";
                 document.getElementById('phone').value = "";
             }
 
-            function showAlert() {
+            function generateHtml(array) {
                 let result = "";
                 
                 if (array.length === 0) {
@@ -170,21 +169,7 @@
                     document.querySelector("#arrayContainer").innerHTML = "";
 
                     for(const element of array){
-                        let arrayContainer = document.querySelector('#arrayContainer');
-                        let newItem = document.createElement('div');
-                        newItem.classList.add('array');
-                        newItem.textContent = `${element.name}  ${element.gender}  ${element.phone} `;
-                        newItem.setAttribute("id", `${element.name}  ${element.gender}  ${element.phone}`);
-                        console.log(`這是第一個輸出 ${element.name}  ${element.gender}  ${element.phone}`);
-                        arrayContainer.appendChild(newItem);
-
-                        const arrayItem = document.getElementById(`${element.name}  ${element.gender}  ${element.phone}`);
-                        const deleteButton = document.createElement('a');
-                        deleteButton.textContent = 'X';
-                        deleteButton.href = '#';
-                        deleteButton.onclick = () => deleteItem(`${element.name}  ${element.gender}  ${element.phone}`);
-                        console.log(`這是第二個輸出 ${element.name}  ${element.gender}  ${element.phone}`);
-                        arrayItem.appendChild(deleteButton);
+                        createContent(element.name, element.gender, element.phone)
                     }
                     document.querySelector(".dropdown-content").style.visibility = "hidden";
                 }
@@ -194,19 +179,7 @@
 
                     for(element of array){
                         if(element.gender === 'M'){
-                            let arrayContainer = document.querySelector('#arrayContainer');
-                            let newItem = document.createElement('div');
-                            newItem.classList.add('array');
-                            newItem.textContent = `${element.name}  ${element.gender}  ${element.phone} `;
-                            newItem.setAttribute("id", `${element.name}  ${element.gender}  ${element.phone}`);
-                            arrayContainer.appendChild(newItem);
-
-                            const arrayItem = document.getElementById(`${element.name}  ${element.gender}  ${element.phone}`);
-                            const deleteButton = document.createElement('a');
-                            deleteButton.textContent = 'X';
-                            deleteButton.href = '#';
-                            deleteButton.onclick = () => deleteItem(`${element.name}  ${element.gender}  ${element.phone}`);
-                            arrayItem.appendChild(deleteButton);
+                            createContent(element.name, element.gender, element.phone)
                         }
                     }
                     document.querySelector(".dropdown-content").style.visibility = "hidden";
@@ -217,35 +190,16 @@
 
                     for(element of array){
                         if(element.gender === 'F'){
-                            let arrayContainer = document.querySelector('#arrayContainer');
-                            let newItem = document.createElement('div');
-                            newItem.classList.add('array');
-                            newItem.textContent = `${element.name}  ${element.gender}  ${element.phone} `;
-                            newItem.setAttribute("id", `${element.name}  ${element.gender}  ${element.phone}`);
-                            arrayContainer.appendChild(newItem);
-
-                            const arrayItem = document.getElementById(`${element.name}  ${element.gender}  ${element.phone}`);
-                            const deleteButton = document.createElement('a');
-                            deleteButton.textContent = 'X';
-                            deleteButton.href = '#';
-                            deleteButton.onclick = () => deleteItem(`${element.name}  ${element.gender}  ${element.phone}`);
-                            arrayItem.appendChild(deleteButton);
+                            createContent(element.name, element.gender, element.phone)
                         }
                     }
                     document.querySelector(".dropdown-content").style.visibility = "hidden";
                 }
             }
-
-            function deleteItem(id){
-                let itemDeleted = document.getElementById(id);
+            
+            function deleteItem(index){
+                let itemDeleted = document.querySelector(`[data-key="${array[index].name} ${array[index].gender} ${array[index].phone}"]`);
                 itemDeleted.remove();
-                component = id.split(" ");
-
-                console.log(component);
-                
-                const index = array.findIndex(element =>
-                    element.name == component[0] && element.gender == component[2] && element.phone == component[4]
-                );
 
                 if (index !== -1) {
                     array.splice(index, 1); 
