@@ -182,7 +182,7 @@
                         const deleteButton = document.createElement('a');
                         deleteButton.textContent = 'X';
                         deleteButton.href = '#';
-                        deleteButton.onclick = deleteItem.bind(null, `${element.name}  ${element.gender}  ${element.phone}`);
+                        deleteButton.onclick = () => deleteItem(`${element.name}  ${element.gender}  ${element.phone}`);
                         console.log(`這是第二個輸出 ${element.name}  ${element.gender}  ${element.phone}`);
                         arrayItem.appendChild(deleteButton);
                     }
