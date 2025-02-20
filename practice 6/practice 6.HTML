@@ -42,16 +42,18 @@
                     array.push(i);
                 }
 
-                newArray = array.sort(() => Math.random() - 0.5);
+                array.sort(() => Math.random() - 0.5);
 
-                generateHtml(newArray, outputNum)
+                generateHtml(array.slice(0, outputNum));
             }
 
-            function generateHtml(arrayGenerated, outputNum){
+            function generateHtml(arrayGenerated){
+                arrayGenerated = arrayGenerated.sort((a, b) => a - b);
+                
                 document.querySelector("#arrayContainer").innerHTML = "";
                 const arrayContainer = document.querySelector('#arrayContainer');
                 
-                for(i = 0; i < outputNum; i++){
+                for(let i = 0; i < arrayGenerated.length; i++){
                     const newItem = document.createElement('div');
                     newItem.classList.add('array');
                     newItem.textContent = `${arrayGenerated[i]}`;
