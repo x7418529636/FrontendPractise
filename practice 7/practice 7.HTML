@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <style>
+        body {
+          text-align: center;
+          margin-top: 300px;
+        }
+        #arrayContainer {
+            margin-top: 20px;
+            border: 2px;
+        }
+        .array {
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin: 5px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            width: 50px;
+        }
+        .array a{
+            color: black;
+        }
+        button{
+            height: 50px;
+            width: 100px;
+        }
+    </style>
+    <head>
+        <title>practice7</title>
+    </head>
+    <body>
+        <div>
+            <button type="button" onclick="showRandomNumber(1, 49, 6)">生成數字</button>
+        </div>
+        <div id="arrayContainer"></div>
+        <script>
+            function showRandomNumber(left, right, outputNum){
+                let array = [];
+
+                for(let i = left; i < right + 1; i++){
+                    array.push(i);
+                }
+
+                array.sort(() => Math.random() - 0.5);
+
+                generateHtml(array.slice(0, outputNum));
+            }
+
+            function generateHtml(arrayGenerated){
+                arrayGenerated = arrayGenerated.sort((a, b) => a - b);
+                
+                document.querySelector("#arrayContainer").innerHTML = "";
+                const arrayContainer = document.querySelector('#arrayContainer');
+                
+                for(let i = 0; i < arrayGenerated.length; i++){
+                    const newItem = document.createElement('div');
+                    newItem.classList.add('array');
+                    newItem.textContent = `${arrayGenerated[i]}`;
+                    arrayContainer.appendChild(newItem);
+                };
+            }
+
+        </script>
+    </body>
+    </html>
