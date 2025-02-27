@@ -1,5 +1,11 @@
 <!doctype html>
 <html lang="en">
+  <style>
+    body {
+      text-align: center;
+      margin-top: 250px;
+    }
+  </style>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +26,7 @@
         日期
       </a>
       
-      <input type="hidden" class="form-control" id="datepicker" placeholder="請選擇日期">
+      <input type="hidden" class="form-control" id="dateSelected" placeholder="請選擇日期">
     </div>
 
     <div class="dropdown">
@@ -78,7 +84,9 @@
           <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 11:00</a></li>
           <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 11:30</a></li>
       </ul>
+      <input type="hidden" id= "timeSelected"><br>
     </div>
+    <input class="btn btn-primary" type="submit" value="Submit" onclick="showAlert()">
     <script 
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
@@ -92,7 +100,7 @@
         };
 
         $(document).ready(function(){
-            $('#datepicker').datepicker({
+            $('#dateSelected').datepicker({
                 format: "yyyy年mm月dd日", 
                 autoclose: true, 
                 todayHighlight: true, 
@@ -101,7 +109,7 @@
 
             $('#dropdownDateButton').on('click', function () {
                 setTimeout(function(){
-                    $('#datepicker').datepicker('show');
+                    $('#dateSelected').datepicker('show');
                 }, 200);
             });
         });
@@ -123,6 +131,14 @@
                 dropdownMenu.appendChild(li);
             }
         });
+
+        function showAlert() {
+                let people = document.getElementById("peopleSelected").value;
+                let date = document.getElementById("dateSelected").value;
+                let time = document.getElementById("timeSelected").value;
+
+                alert(`${people} ${date} ${time}`);
+            }
     </script>
   </body>
 </html>
