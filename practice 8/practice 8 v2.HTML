@@ -1,13 +1,37 @@
 <!doctype html>
 <html lang="en">
   <style>
-    body {
-      --bs-body-text-align: center;
-      margin: 250px;
+    html, body {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
     }
-    .btn btn-secondary dropdown-toggle {
-        --bs-dropdown-min-width: 100px;
+
+    .btn {
+        min-width: 200px;
+        height: 40px;
+        font-size: 16px; 
+        margin: 10px;
     }
+
+    .dropdown-menu {
+    text-align: center!important;
+    }
+
+    .dropdown-menu.show {
+    top: 100% !important;
+    max-height: 250px;
+    overflow-y: auto;
+    }
+
+    .dropdown-menu-center {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    text-align: center !important;
+}
+
   </style>
   <head>
     <meta charset="utf-8">
@@ -17,72 +41,72 @@
   </head>
   <body>
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" id="dropdownDateButton">
+        <button class="btn btn-light dropdown-toggle" id="dropdownDateButton">
             選擇日期
         </button>
     </div>
     <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" id="time" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            選擇時間
-          </a>
-        
-          <ul id="time-dropdown" class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 12:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 12:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 01:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 01:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 02:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 02:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 03:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 03:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 04:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 04:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 05:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 05:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 06:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 06:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 07:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 07:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 08:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 08:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 09:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 09:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 10:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 10:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 11:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 11:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">中午 12:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">中午 12:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 01:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 01:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 02:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 02:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 03:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 03:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 04:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 04:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 05:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 05:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 06:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 06:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 07:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 07:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 08:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 08:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 09:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 09:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 10:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 10:30</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 11:00</a></li>
-              <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 11:30</a></li>
-          </ul>
-          <input type="hidden" id= "timeSelected"><br>
+        <a class="btn btn-light dropdown-toggle" id="time" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        選擇時間
+        </a>
+    
+        <ul id="time-dropdown" class="dropdown-menu position-absolute start-50 translate-middle-x">
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 12:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 12:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 01:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 01:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 02:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 02:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 03:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 03:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 04:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">凌晨 04:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 05:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 05:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 06:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 06:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 07:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">清晨 07:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 08:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 08:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 09:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 09:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 10:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 10:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 11:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">上午 11:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">中午 12:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">中午 12:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 01:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 01:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 02:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 02:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 03:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 03:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 04:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 04:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 05:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 05:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 06:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">下午 06:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 07:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 07:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 08:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 08:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 09:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 09:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 10:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 10:30</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 11:00</a></li>
+            <li><a class="dropdown-item" href="#" onclick="setWords('time', this.textContent)">晚上 11:30</a></li>
+        </ul>
+        <input type="hidden" id= "timeSelected"><br>
     </div>
     <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" id="people" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="btn btn-light dropdown-toggle" id="people" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             人數
         </a>
-        <ul id="people-dropdown" class="dropdown-menu"></ul>
+        <ul id="people-dropdown" class="dropdown-menu position-absolute start-50 translate-middle-x"></ul>
         <input type="hidden" id= "peopleSelected"><br>
     </div>
 
@@ -100,17 +124,25 @@
         };
 
         $(document).ready(function(){
-            let $datepicker = $('<input type="text" id="hiddenDatepicker">').appendTo('body').hide();
+            let $datepicker = $('<input type="text" id="hiddenDatepicker" style="display:none;">').appendTo('body');
 
             $datepicker.datepicker({
                 format: "yyyy年mm月dd日", 
                 autoclose: true,
                 todayHighlight: true, 
-                language: "zh-TW" 
+                language: "zh-TW", 
+                container: 'body' 
             });
 
             $('#dropdownDateButton').on('click', function () {
                 $datepicker.datepicker('show'); 
+                let buttonOffset = $(this).offset();
+
+            $('.datepicker').css({
+                'top': buttonOffset.top + $(this).outerHeight() + 'px',
+                'left': buttonOffset.left + 'px',
+                'z-index': 1050
+            });
             });
 
             $datepicker.on('changeDate', function(e) {
@@ -129,7 +161,8 @@
                 a.href = "#";
                 a.textContent = i;
                 a.onclick = function() {
-                    setWords('people', i);
+                    let tempWord = i + ' 人';
+                    setWords('people', tempWord);
                 };
 
                 li.appendChild(a);
